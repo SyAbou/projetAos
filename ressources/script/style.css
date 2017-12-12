@@ -1,0 +1,130 @@
+
+h1{
+        color: black;
+}
+
+td{
+        align-content: left;
+        width: 10px;
+}
+
+.table{
+        margin:auto;
+}
+
+#elemselec{
+        font-size: large;
+        font-weight: bold;
+        color: blue;
+}
+
+#itemText{
+    height:100px;
+    width:300px;
+}
+
+.hidden{
+    display:none;    
+}
+
+.visile{
+    display:default;
+}
+
+body{
+        background:url('');
+}
+
+
+li {
+    list-style-type: none;
+}
+
+
+/**  Imported style  **/
+
+footer{
+        background-color: #424558;
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         height: 35px;
+         text-align: center;
+         color: #CCC;
+     }
+     
+     footer p {
+         padding: 10.5px;
+         margin: 0px;
+         line-height: 100%;
+     }
+.container{
+        margin-top:-20px;
+    }
+    .image-preview-input {
+        position: relative;
+            overflow: hidden;
+            margin: 0px;    
+        color: #333;
+        background-color: #fff;
+        border-color: #ccc;    
+    }
+    .image-preview-input input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 0;
+            padding: 0;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            filter: alpha(opacity=0);
+    }
+    .image-preview-input-title {
+        margin-left:2px;
+    }
+    
+    .btn-label {position: relative;left: 12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+    .btn-labeled {padding-top: 0;padding-bottom: 0;}
+    .btn { margin-bottom:10px; }
+
+
+}
+footer{
+        background-color: #424558;
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         height: 35px;
+         text-align: center;
+         color: #CCC;
+     }
+     
+     footer p {
+         padding: 10.5px;
+         margin: 0px;
+         line-height: 100%;
+     }
+
+     .navbar-login
+     {
+         width: 305px;
+         padding: 10px;
+         padding-bottom: 0px;
+     }
+     
+     .navbar-login-session
+     {
+         padding: 10px;
+         padding-bottom: 0px;
+         padding-top: 0px;
+     }
+     
+     .icon-size
+     {
+         font-size: 87px;
+     }
+
+     
