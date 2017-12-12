@@ -1,0 +1,69 @@
+<html>
+        <head>
+            <title>authentification</title>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        </head>
+        
+        <body>
+            <form method="POST" action="/users/authentification" id="form">
+                <input type="text" id="login" name="login" placeholder="login">
+                <input type="password" id= "mdp" name="mdp" placeholder = "Mot de passe">
+                <input type="submit" id= "valider" value="valider"/>
+            </form>
+            
+            <script>
+                $("#form").on("submit", function(event) {
+                    var params = {
+                                    "login": $("#login").val(),
+                                    "mdp": $("#mdp").val()
+                                };
+                    $.post($(event.target).attr("action"), params, function(result) {
+                        if(result.message == 'verification validé')
+                        {
+                            console.log('session');
+                        localStorage.setItem("token",result.token); 
+                       console.log(localStorage.getItem("token"));
+                       window.location="http://localhost:8080/users/Accueil";
+                        }
+                      else
+                        {
+                          console.log('identifiant et mots de passe incorrect');
+                        }
+                    }); 
+                   
+                    
+                    // nous permets d'afficher le token stocké dans la sessionStorage
+                   // console.log(sessionStorage.getItem('token'));
+                   
+                  
+                    event.preventDefault();
+                    return false;
+                });
+
+              /*   $(document).ready(function(resultat){
+                    
+                   $.ajax({ 
+                    url: "authentification",
+                    type: 'GET',
+                    async: true,
+                    success: function(data){
+
+                        console.log(data);
+
+
+                    }
+
+                   
+                   
+
+                });
+                
+            }); */
+
+
+                </script>
+
+
+        </body>
+        
+</html>

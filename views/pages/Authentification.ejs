@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="jumbotron">
+<head>
+  <title>PartagePhotos</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h1>ViewShare</h1> 
+  <p>share you're live with us</p> 
+  <form class="form-inline"  method="POST" action="/users/Authentification" id="form">
+    <div class="input-group">
+	
+              <input type="text" id="login" class="form-control" size="50" placeholder="Username">
+              <input name="pswd" id="mdp" placeholder="Password" class="form-control" size="50" type="Password" />
+               
+              <input  class="btn btn-success btn btn-success " type="submit" value="Connexion"/>
+			  <input  class="btn btn-success btn btn-success " id="valider" type="submit" value="Subscribe"/>
+			  
+               
+			   </div>
+	  
+        <div id="erreur" > mot de passe incorrect </div>
+     
+    </div>
+  </form>
+  <script>
+    
+    
+    $("#valider").on("click", function(event){
+
+      window.location="http://localhost:8080/users/Enregistrement";
+    });
+    
+    /* masque la div erreur*/
+    $('#erreur').hide();
+      $("#form").on("submit", function(event) {
+          var params = {
+                          "login": $("#login").val(),
+                          "mdp": $("#mdp").val()
+                      };
+          $.post($(event.target).attr("action"), params, function(result) {
+              if(result.message == 'verification validé')
+              {
+              localStorage.setItem("token",result.token); 
+              var jeton = localStorage.getItem("token");
+              window.location="http://localhost:8080/users/Accueil?jetons="+jeton;
+              }else{
+                console.log("mdp incorrect il faut rediriger vers une page erreur");
+                $('#erreur').show();
+              }
+              });
+
+      event.preventDefault();
+          return false;
+    });
+
+    
+
+      </script>
+</body>
+</html>

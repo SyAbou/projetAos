@@ -1,0 +1,39 @@
+<html>
+        <head>
+            <title>enregistrement</title>
+            <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        </head>
+        
+        <body>
+        
+           <b>partie enregistrement</b>
+        
+        <script>
+       
+        $(document).ready(function(event)
+        {   
+            console.log("c'est parti");
+            //console.log(localStorage.getItem('token'));
+            var jeton ={ "jetons" : localStorage.getItem('token')}
+           
+
+            $.post('/users/enregistrement', jeton, function(result) {
+               
+               if(result.message == 'utilisateur authentifié'){
+
+                console.log("utilisateur connecté");
+               }
+
+            });
+          
+
+        });
+
+
+        
+        </script>
+        
+        </body>
+
+        
+        </html>
