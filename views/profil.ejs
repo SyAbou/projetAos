@@ -72,21 +72,19 @@
 		<form class="form" role="form" method="post" action="/upload" enctype="multipart/form-data" >       
 			<h1>Sélectionnez l'image à partager</h1>
 		 <%= typeof msg != 'undefined' ? msg : '' %>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
       <div class="file-field input-field">
         <div class="btn-grey">
           <input name="myImage" type="file">
         </div>
         <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
+          <input class="file-path validate" type="text" name=title>
         </div>
       </div><br>    		  
 		<button class="btn btn-lg btn-primary btn-block"  name="Publier" type="Submit">Publier</button>	 
       
     </form>
     <br>
-		<% for(var i=0; i<images.length; i++) {%>
-			<img src="<%= typeof images[i].image_url != 'undefined' ? images[i].image_url : '' %>" class="responsive-img">
+		<% for(var i=0; i<images.length; i++) {%> <img src="<%= typeof images[i].image_url != 'undefined' ? images[i].image_url : '' %>" class="responsive-img">
 		<% } %>
 		
  </div>

@@ -1,6 +1,5 @@
 var http = require('http');
 var url = require('url');
-var fs = require('fs');
 var multer=require('multer');
 var ejs = require('ejs');
 var mysql = require('mysql');
@@ -10,6 +9,7 @@ var bodyParser = require('body-parser');
 const util = require('util');
 const path = require('path');
 
+var Photo = require('./models/insertion');
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
@@ -114,6 +114,24 @@ app.post('/upload', (req, res) => {
             images: result//`uploads/${req.file.filename}`
           });
         })
+
+        var image = "uploads/"+req.file.filename;
+        var title = "test";//req.body.title; 
+        var description= "test";
+        var visibilite= "1";
+        var user="1";
+        var newPhoto = {
+          image_nom: title,
+          image_description: description,
+          visibilite:visibilite,
+          id_user:user,
+          image_url: image 
+
+            };
+
+            Photo.createPhoto(newPhoto, function(err, result){
+                if(err) throw err;
+            });
         
       }
     }
