@@ -90,11 +90,39 @@
         });
 
 ## **Api rest**
-### Ressources ##
 
-> Pour l'instant qu'une ressource est en place
 
- - getFriends: gestion des amis
+ ----------
+
+
+ 
+ | Ressource | Verbe          | Consumes  | Méthode  | Adresse  |Description |
+| ------------- |:----------------:| -----:|
+| Friends| Post | {jetons}/{params} | getFriends()  | http://localhost:8080/users/profilamis?jetons= |Renvoie tous les amis sous format JSON au serveur |
+
+###Authentification###
+
+| Http verb| URL        | Reponse URL  | Reponse body  |Reason |
+| ------------- |:----------------:| -----:|
+| Post| Users/enregistrement| 200| Enregistrement | Enregistrement réussi|
+| | | 500| Enregistrement | Erreur|
+
+###Utilisateur###
+
+| Http verb| URL        | Reponse URL  | Reponse body  |Reason |
+| ------------- |:----------------:| -----:|
+|GET| pages/Authentification| 200| | Traitement réussit|
+| | | 500|  | Connexion impossible à la base de données|
+|POST| pages/profile| 200| Authentification| Traitement réussit|
+|| | 204| Authentification| Erreur :Mdp/login incorrect.|
+|GET| pages/ProfilAmis| 200| Accès profil amis| Accès réussi|
+| | | 500|  | Erreur|
+|GET| pages/Friends | 200| Accès page friends| Accès réussi|
+| | | 500|  | Erreur|
+|POST| pages/ProfilAmis| 200| Accès profil amis| Accès réussi|
+| | | 500|  | Erreur|
+|POST| pages/Friends | 200| Accès page friends| Accès réussi|
+| | | 500|  | Erreur|
  
 
 
