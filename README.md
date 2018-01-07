@@ -63,9 +63,10 @@ var con = mysql.createConnection({
 ## **Api rest**
 ### Ressources ##
 
-> Pour l'instant qu'une ressource est en place
-
  - getFriends: gestion des amis
+----------
+
+
  
  | Ressource | Verbe          | Consumes  | Méthode  | Adresse  |Description |
 | ------------- |:----------------:| -----:|
@@ -93,5 +94,6 @@ var con = mysql.createConnection({
 |POST| pages/ProfilAmis| 200| Accès profil amis| Accès réussi|
 | | | 500|  | Erreur|
 |POST| pages/Friends | 200| Accès page friends| Accès réussi|
-| | | 500|  | Erreur|# projetAos
-Master 2: Projet aos partage photos et vidéos
+| | | 500|  | Erreur|
+ 
+
