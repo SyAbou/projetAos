@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="jumbotron">
+<head>
+  <title>Friends</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div class="jumbotron text-center">
+                    
+            <h1>voici tous vos amies !</h1>
+      
+                    
+            
+                
+                <% for(var i=0; i<list.length; i++) {%>
+                  <ul>  
+                  <li><a href="" onclick="getfriend()" ><%= list[i].login %></a></li>
+                    <li><a href="" onclick="getfriend()" ><%= list[i].adresse_mail %></a></li>
+                    <li><a href="" onclick="getfriend()" ><%= list[i].adresse %></a></li>
+                    <li><a href="" onclick="getfriend()" ><%= list[i].telephone %></a></li>
+                  </ul>
+                    <% } %> 
+                 
+                
+                <script>
+
+                  function getfriend(){
+                    
+                    var jeton = localStorage.getItem("token");
+                    var params = {'jetons':jeton};
+                  $.post("/users/profilamis",params,function(){
+                    alert("je suis dans le post de profilamis");
+                  window.location="http://localhost:8080/users/profilamis?jetons="+jeton;
+                    });
+                  console.log("je suis dans le getfriend");
+                  }
+                  
+        
+                </script> 
+              
+</body>
+</html>

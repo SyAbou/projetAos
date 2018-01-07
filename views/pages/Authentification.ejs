@@ -25,13 +25,12 @@
                
 			   </div>
 	  
-        <div id="erreur" > mot de passe incorrect </div>
+        <div id="erreur" > mot de passe ou login incorrect </div>
      
     </div>
   </form>
   <script>
-    
-    
+   
     $("#valider").on("click", function(event){
 
       window.location="http://localhost:8080/users/Enregistrement";
@@ -44,14 +43,17 @@
                           "login": $("#login").val(),
                           "mdp": $("#mdp").val()
                       };
-          $.post($(event.target).attr("action"), params, function(result) {
-              if(result.message == 'verification validé')
+          $.post($(event.target).attr("action"), params, function(result,status,xhr) {
+
+
+            if(xhr.status == 200)
               {
-              localStorage.setItem("token",result.token); 
+              localStorage.setItem("token",result.token);
+              localStorage.setItem("id_user",result.id_user);
               var jeton = localStorage.getItem("token");
-              window.location="http://localhost:8080/users/Accueil?jetons="+jeton;
-              }else{
-                console.log("mdp incorrect il faut rediriger vers une page erreur");
+              var id_user = localStorage.getItem("id_user");
+              window.location="http://localhost:8080/users/Accueil?id="+id_user+"&jetons="+jeton;
+              }else if(xhr.status != 200){
                 $('#erreur').show();
               }
               });
