@@ -80,6 +80,74 @@ exports.listAmis = function(id_userco,callback){
     });
 }
 
+exports.getUser= function(id_user, callback){
+        id = parseInt(id_user, 10);
+        
+        con.query("SELECT * FROM personne WHERE id_personne='"+id+"'", function(err, result){
+            if(err){
+                throw err;
+            }else if(result == undefined){
+                console.log("je suis dans le else if de user")
+               callback(null,result);
+            }
+            else{
+                console.log("je suis dans le else de user");
+               
+                var string_data = JSON.stringify(result);
+                
+                var resultat = JSON.parse(string_data); 
+                console.log(resultat);
+                callback(null,resultat);
+            }
+        }
+      );
+    }
+    
+    exports.getAllUser= function(id_user, callback){
+        id = parseInt(id_user, 10);
+        con.query("SELECT id_follower FROM follower WHERE id_personne='"+id+"'", function(err, result){
+            let list = [];
+            if(err){
+                throw err;
+            }else if(result == undefined){
+                
+               callback(null,result);
+            }
+            else{
+                var string_data = JSON.stringify(result);
+                var resultat = JSON.parse(string_data); 
+                
+                var chaine="";
+                for(var i=0 ; i<resultat.length; i++){
+
+                    chaine += "AND id_personne !='"+ resultat[i].id_follower+"' " ;
+                    chaine = chaine.substring(0,chaine.length-1);
+                }
+                
+        con.query("SELECT * FROM personne WHERE id_personne !='"+id+"'"+chaine+"", function(err, result){
+            if(err){
+                throw err;
+            }else if(result == undefined){
+                
+               callback(null,result);
+            }
+            else{
+                var string_data = JSON.stringify(result);
+                
+                var resultat = JSON.parse(string_data); 
+             
+                callback(null,resultat);
+            }
+        }
+      );
+    }
+
+    });
+    }
+
+
+
+
 exports.infoAmis = function(callback){
 
 

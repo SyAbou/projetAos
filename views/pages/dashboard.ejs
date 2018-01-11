@@ -20,11 +20,12 @@
     <div class="col-sm-3 sidenav">
           
           
-      <h4>bienvenue <%= user.id %> </h4>
+      <h3>Bienvenue <%= user %> </h3>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="" id="accueil">Home</a></li>
         <li><a href="" id="friends">Friends</a></li>
         <li><a href="#section3" id="photos" >Photos</a></li>
+        <li><a href="#test" id="chercherAmis" >New Friends</a></li>
         <li><a href="http://localhost:8080/users/Authentification" id="deconnexion">Déconnexion</a></li>
       </ul><br>
       <div class="input-group">
@@ -89,12 +90,12 @@
 <script>
   var jeton = localStorage.getItem("token");
   var id_user = localStorage.getItem("id_user");
+  
   $("#deconnexion").on("click", function(event){
     localStorage.removeItem("token");
+    localStorage.removeItem("id_user");
     console.log("je me suis deconnecter");
   });
-
-  
 
   $("#friends").on("click", function(event){
     
@@ -103,21 +104,35 @@
       window.location="http://localhost:8080/users/friends?id="+id_user+"&jetons="+jeton;
      });
     
-     console.log("je suis dans le friends");
+    event.preventDefault();
+          return false;
   });
 
   $("#photos").on("click", function(event){
-    //var jeton = localStorage.getItem("token");
     window.location="http://localhost:8080/profil?id="+id_user+"&jetons="+jeton;
     console.log("je suis dans le profil d'ami");
+    event.preventDefault();
+          return false;
   });
 
   $("#accueil").on("click", function(event){
-    //var jeton = localStorage.getItem("token");
     window.location="http://localhost:8080/users/Accueil?id="+id_user+"&jetons="+jeton;
     console.log("je suis dans le home");
+    event.preventDefault();
+          return false;
   });
 
+  $("#chercherAmis").on("click",function(event){
+   
+   var params = {'jetons':jeton};
+     $.post("/users/ChercherAmis",params,function(){
+
+      window.location="http://localhost:8080/users/ChercherAmis?id="+id_user+"&jetons="+jeton;
+      
+     });
+     event.preventDefault();
+          return false;
+  });
   
       
   </script>

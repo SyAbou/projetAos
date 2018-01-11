@@ -23,7 +23,8 @@
                             console.log('session');
                         localStorage.setItem("token",result.token); 
                        console.log(localStorage.getItem("token"));
-                       window.location="http://localhost:8080/users/Accueil";
+                       var jeton = localStorage.getItem("token");
+                       window.location="http://localhost:8080/users/Accueil?jetons="+jeton;
                         }
                       else
                         {
@@ -39,28 +40,6 @@
                     event.preventDefault();
                     return false;
                 });
-
-              /*   $(document).ready(function(resultat){
-                    
-                   $.ajax({ 
-                    url: "authentification",
-                    type: 'GET',
-                    async: true,
-                    success: function(data){
-
-                        console.log(data);
-
-
-                    }
-
-                   
-                   
-
-                });
-                
-            }); */
-
-
                 </script>
 
 

@@ -16,10 +16,10 @@ var Photo = require('./models/insertion');
 
 
 var con = mysql.createConnection({
-    host: 'localhost',
-    port: 8889,
+    host: '127.0.0.1',
+    port: 3306,
 	user: 'root',
-	password : 'root',
+	password : '',
     database: 'aos'
 });
 application.set('view engine', 'ejs');
@@ -74,6 +74,9 @@ application.get('/profil', (req, res) => {
   })
 });
 
+
+
+
 application.post('/upload', (req, res) => {
    upload(req, res, (err) => {
         console.log("le premier console de upload "+ req.file);
@@ -117,6 +120,7 @@ application.post('/upload', (req, res) => {
     }
     });
  });
+ 
 
 //--------------------- othmane-----------------------------------------------------------------------------
 // les body parser pour nos requettes post
@@ -177,11 +181,10 @@ application.post('/users/Authentification', function (req, res, next) {
 application.get('/users/Accueil',verifToken,function (req, res, next) {
     var user_connecter = req.body.id || req.query.id || req.headers['x-access-id'];
 
-    console.log(user_connecter);
-    res.render('pages/dashboard.ejs', { user: user_connecter });
-    
-    
-    console.log('page retourner');
+    utilisateur.getUser(user_connecter,function(callback,callback1){
+        console.log(callback1[0].login);
+        res.render('pages/dashboard.ejs', { user: callback1[0].login});
+    });
    
 });
 
@@ -254,6 +257,48 @@ application.post('/users/Enregistrement',function (req, res, next) {
                         });
                         next();
                     });
+
+    application.get('/users/ChercherAmis', verifToken ,function(req, res, next)
+    {
+        var user_connecter = req.body.id || req.query.id || req.headers['x-access-id'];
+                        
+            utilisateur.getAllUser(user_connecter,function(callback1,callback2)
+            {
+                res.render('pages/nv_amis.ejs',{list : callback2});
+                       
+            });
+    });
+                        
+            application.post('/users/ChercherAmis',verifToken,function (req, res, next) {
+                            // Le jeton est ici : req.params.token (http://localhost:3000/users/Accueil/?token=xxx)
+                                
+                            res.status(200).json({
+                                "message":"accées page chercherAmis"
+                                });
+                                next();
+                            });
+            
+
+
+
+
+    application.post('/users/ajout',verifToken,function (req, res, next) {
+                        var token = req.body.jetons || req.query.jetons || req.headers['x-access-token'];
+                        var userco = req.body.id_user;
+                        var user_follower = req.body.id_follower
+                        console.log("je fait ajout");
+                        Photo.AjouterAmis(user_follower,userco,function(callback1,callback2,callback3){
+                            console.log(callback3.status);
+                            if(callback3.status == 200){
+                                console.log('insertion reussi')
+                                res.redirect("http://localhost:8080/users/friends?id="+userco+"&jetons="+token);
+                            }
+                         });
+
+                    });               
+
+
+
 
 function verifToken(req, res, next) {
    

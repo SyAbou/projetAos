@@ -16,20 +16,33 @@
       
                     
             
-                
+            <form class="form-inline"  method="POST" action="/users/friends" id="form">  
                 <% for(var i=0; i<list.length; i++) {%>
                   <ul>  
-                  <li><a href="" onclick="getfriend()" ><%= list[i].login %></a></li>
-                    <li><a href="" onclick="getfriend()" ><%= list[i].adresse_mail %></a></li>
-                    <li><a href="" onclick="getfriend()" ><%= list[i].adresse %></a></li>
-                    <li><a href="" onclick="getfriend()" ><%= list[i].telephone %></a></li>
+                  <li><input type="button" name="ajout_amie" id="ajout_amie" value="ajouter" onclick="ajouteramis('<%= list[i].id_personne %>')"><a href="" onclick="getfriend('<%= list[i] %>')" > <%= list[i].login %></a></li>
+                    <li><a href="" ><%= list[i].adresse_mail %></a></li>
+                    <li><a href="" ><%= list[i].adresse %></a></li>
+                    <li><a href="" ><%= list[i].telephone %></a></li>
                   </ul>
                     <% } %> 
                  
-                
+            </form>
                 <script>
+                 function ajouteramis(user_ajouter){
+                  var jeton = localStorage.getItem("token");
+                  var userco = localStorage.getItem("user_id");
+                    var params = {'jetons':jeton,
+                                  'id_follower': userajouter,
+                                  'id_user' : userco
+                                  };
+                  $.post("/users/friends",params,function(res, status, xhr){
+                    
+                  });
 
-                  function getfriend(){
+
+                 }
+
+                  function getfriend(user){
                     
                     var jeton = localStorage.getItem("token");
                     var params = {'jetons':jeton};

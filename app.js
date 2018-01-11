@@ -67,17 +67,6 @@ app.get('/', function (req, res) {
       res.render('connexion');
 });
 
-/*app.get('/profil', function (req, res) {
-    app.use(express.static(__dirname+'/ressources'));
-    var photos=[];
-    con.query("SELECT * FROM photo", function (err, result) {
-    if (err)
-        throw err;
-    photos=result;
-    res.render('profil', {photos});
-    });    
-});*/
-
 app.use(express.static('./ressources'));
 
 
